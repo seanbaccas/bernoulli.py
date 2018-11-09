@@ -20,8 +20,4 @@ def bernoulli(n):
         for k in range(n):
             x = x - nck(n,k)*bernoulli(k)/float(n-k+1)
     return x
-#k = []
-#for i in range(10):
-#    k = k + [bernoulli(2*i)]
-#print k
-    
+#output is a float, and it doesn't recognise "0", but close enough
