@@ -13,11 +13,12 @@ def bernoulli(n):
     x = 0
     if n ==0:
         return 1
-    #else:
-    #    x = -nchoosek(n,n-1)*bernoulli(n-1)/float(2)    #this is final term in the sum
-    #return x
+   # next we define the sum recursively, by starting with b0=1 and holding the 
+   #sum in memory while next terms are calculated
     else:
         for k in range(n):
             x = x - nck(n,k)*bernoulli(k)/float(n-k+1)
+    if abs(x) < 10**-14:
+        return 0
     return x
-#output is a float, and it doesn't recognise "0", but close enough
+
