@@ -48,4 +48,4 @@ def bernoulli(n):
     #    return [0,1]
     return x
 
-print bernoulli(20)
+#print bernoulli(20)
