@@ -30,22 +30,32 @@ def nck(n,k):
 
 #recursively defined bernoulli function
 
-def bernoulli(n):
-    if n%2 == 1 and n > 2:
-        return [0,1]
-    x = [0,1]
-    if n ==0:
-        return [1,1]
-    
-    else:
-        for k in range(n):
-            #x = x - nck(n,k)*bernoulli(k)/float(n-k+1)
-            y = [nck(n,k)*bernoulli(k)[0],(n-k+1)*bernoulli(k)[1]]
-            y =  [y[0]/gcd(y[0],y[1]) , y[1]/gcd(y[0],y[1])]
-            x = frsub(x, y)
-            x  = [x[0]/gcd(x[0],x[1]) , x[1]/gcd(x[0],x[1])]
-    #if abs(x[0]) < 10**-14:
-    #    return [0,1]
-    return x
+def setup(n,d):
+	x = [0,1]
+	if n in d:
+		return d[n]
+	else:
+		
+		for k in range(n):
+			y = [nck(n,k)*setup(k,d)[0], (n-k+1)*setup(k,d)[1]]
+			y =  [y[0]/gcd(y[0],y[1]) , y[1]/gcd(y[0],y[1])]
 
-#print bernoulli(20)
+			x = frsub(x, y)
+			#print (x, 'first')
+			x  = [x[0]/gcd(x[0],x[1]) , x[1]/gcd(x[0],x[1])]
+			x = [int(x[0]), int(x[1])]
+			#print(x,'second')
+		ans = x
+		d[n] = ans
+		return ans
+
+
+
+def bernoulli(n):
+	d = {0:[1,1], 1:[-1,2]}
+	if n %2 == 1 and n > 2:
+		return [0,1]
+	return setup(n,d)
+
+#for i in range(100):
+#	print(bernoulli(i))
